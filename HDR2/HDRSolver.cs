@@ -11,6 +11,10 @@ namespace HDR2
 {
     class TestHDRSolver : HDRSolver
     {
+        public override List<string> GetArgs()
+        {
+            return new List<string>();
+        }
         protected override double[] Solve()
         {
             var data = images[0].data;
@@ -21,6 +25,7 @@ namespace HDR2
     }
     abstract class HDRSolver
     {
+        public abstract List<string> GetArgs();
         protected List<MyImage> images { get; private set; } = new List<MyImage>();
         protected int width { get; private set; }
         protected int height { get; private set; }

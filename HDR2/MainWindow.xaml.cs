@@ -45,9 +45,9 @@ namespace HDR2
                     {
                         Children=
                         {
-                            new Button{Content="Open"}.Set(()=>sourceImagePanel.OpenImages()),
-                            new Button{Content="Generate"}.Set(async()=>targetImagePanel.ShowImage(await settingsPanel.ProcessImage(sourceImagePanel.GetImages()))),
-                            new Button{Content="Save"}.Set(()=>targetImagePanel.SaveImage())
+                            new Button{Content="Open"}.Set(Open),
+                            new Button{Content="Generate"}.Set(Run),
+                            new Button{Content="Save"}.Set(Save)
                         }
                     }.Set(0,0),
                     new LogPanel().Set(1,0),
@@ -60,10 +60,24 @@ namespace HDR2
                 }
             };
         }
+        void RegisterEvents()
+        {
+            this.KeyDown += MainWindow_KeyDown;
+        }
+        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) Run();
+            else if (e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.O) Open();
+            else if (e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.S) Save();
+        }
+        void Open() { sourceImagePanel.OpenImages(); }
+        async void Run() { targetImagePanel.ShowImage(await settingsPanel.ProcessImage(sourceImagePanel.GetImages())); }
+        void Save() { targetImagePanel.SaveImage(); }
         public MainWindow()
         {
             InitializeComponent();
             InitializeViews();
+            RegisterEvents();
             LogPanel.Log("Ready.");
         }
     }

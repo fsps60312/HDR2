@@ -8,6 +8,10 @@ namespace HDR2
 {
     class TestToneMappingSolver:ToneMappingSolver
     {
+        public override List<string> GetArgs()
+        {
+            return new List<string>();
+        }
         protected override byte[] Solve(MyImageD image)
         {
             byte[] ans = new byte[image.data.Length];
@@ -31,6 +35,7 @@ namespace HDR2
     }
     abstract class ToneMappingSolver
     {
+        public abstract List<string> GetArgs();
         protected abstract byte[] Solve(MyImageD image);
         public MyImage RunToneMapping(MyImageD image) { return new MyImage(Solve(image), image); }
     }

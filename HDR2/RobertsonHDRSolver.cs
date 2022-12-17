@@ -9,6 +9,10 @@ namespace HDR2
 {
     class RobertsonHDRSolver:HDRSolver
     {
+        public override List<string> GetArgs()
+        {
+            return new List<string>();
+        }
         double[] g_mapping = new double[256];
         double E;
         protected virtual double w(byte z,double exposure) { return Math.Max(1e-9, Math.Min(z, 255 - z) - 25); }

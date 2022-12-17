@@ -8,6 +8,10 @@ namespace HDR2
 {
     class HeatMapToneMapping:ToneMappingSolver
     {
+        public override List<string> GetArgs()
+        {
+            return new List<string>();
+        }
         void GetHeatColor(double v,out byte r,out byte g,out byte b)
         {
             if (v < 0) r = g = b = 0;
